@@ -1,0 +1,36 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <NoWarn>NU1507</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="MM.Utilities" Version="3.2.0" />
+    <PackageVersion Include="FluentValidation" Version="11.7.1" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-rc.1.23421.29" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.0-preview.7.23375.6" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-preview.7.23375.6" />
+    <PackageVersion Include="Scrutor" Version="4.2.2" />
+    <PackageVersion Include="Serilog" Version="3.0.1" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="7.0.0" />
+    <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.3.0-dev-00793" />
+    <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
+    <PackageVersion Include="Serilog.Extensions.Hosting" Version="7.0.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="7.0.0" />
+    <PackageVersion Include="Serilog.Formatting.Compact" Version="1.1.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="7.0.1" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageVersion Include="prometheus-net" Version="8.0.1" />
+    <PackageVersion Include="prometheus-net.AspNetCore" Version="8.0.1" />
+    <PackageVersion Include="prometheus-net.DotNetRuntime" Version="4.4.0" />
+    <PackageVersion Include="AWSSDK.Core" Version="3.7.202.17" />
+    <PackageVersion Include="AWSSDK.DynamoDBv2" Version="3.7.202.3" />
+    <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageVersion>
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+</Project>

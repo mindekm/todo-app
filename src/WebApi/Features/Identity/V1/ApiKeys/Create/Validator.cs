@@ -8,5 +8,8 @@ public sealed class Validator : AbstractValidator<RequestDto>
     {
         RuleFor(r => r.Name)
             .NotEmpty();
+
+        RuleFor(r => r.Roles)
+            .NotEmpty();
     }
 }

@@ -2,10 +2,15 @@
 
 public sealed class ResourceNotFound : DomainError
 {
-    public ResourceNotFound(Guid id)
+    public ResourceNotFound(string id)
     {
         Id = id;
     }
 
-    public Guid Id { get; }
+    public ResourceNotFound(Guid id)
+    {
+        Id = id.ToString();
+    }
+
+    public string Id { get; }
 }

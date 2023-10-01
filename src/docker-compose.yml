@@ -1,4 +1,17 @@
 ﻿services:
+  sidecar:
+    build:
+      dockerfile: "Sidecar/Dockerfile"
+    depends_on:
+      - app
+    environment:
+      SERVICE_NAME: "app"
+      SERVICE_PORT: 3000
+      LISTENER_PORT: 5000
+      DEBUG_LEVEL: "warn"
+    ports:
+      - 5000:5000
+
   app:
     build:
       dockerfile: "WebApi/Dockerfile"
@@ -6,8 +19,6 @@
         PRODUCT_VERSION: "1.0.0"
     depends_on:
       - dynamodb
-    ports:
-      - 3000:3000
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: "http://+:3000"

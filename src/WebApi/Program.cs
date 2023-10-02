@@ -14,6 +14,7 @@ using Prometheus.DotNetRuntime;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Formatting.Compact;
+using StackExchange.Redis;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using WebApi.Authentication;
 using WebApi.Authorization;
@@ -174,7 +175,8 @@ public static class Program
             .AddSwagger()
             .AddFeatureManagement()
             .AddDynamoDb()
-            .AddIdempotentResults();
+            .AddIdempotentResults()
+            .AddRedis();
 
         return builder;
     }
@@ -319,9 +321,19 @@ public static class Program
     {
         var services = builder.Services;
 
+        // services.AddTransient<IIdempotentResults, DynamoDbResults>();
+        // services.AddSingleton<IIdempotentResults, RedisResults>();
         services.AddSingleton<IIdempotentResults, InMemoryResults>();
 
-        // services.AddTransient<IIdempotentResults, DynamoDbResults>();
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddRedis(this WebApplicationBuilder builder)
+    {
+        var services = builder.Services;
+
+        var multiplexer = ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"));
+        services.AddSingleton<IConnectionMultiplexer>(multiplexer);
 
         return builder;
     }

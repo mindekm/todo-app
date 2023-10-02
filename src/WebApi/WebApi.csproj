@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.HighPerformance" />
     <PackageReference Include="Serilog"/>
     <PackageReference Include="Serilog.AspNetCore"/>
     <PackageReference Include="Serilog.Enrichers.Environment"/>
@@ -21,6 +22,7 @@
     <PackageReference Include="prometheus-net.AspNetCore"/>
     <PackageReference Include="prometheus-net.DotNetRuntime"/>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+    <PackageReference Include="StackExchange.Redis" />
     <PackageReference Include="Swashbuckle.AspNetCore"/>
     <PackageReference Include="FluentValidation"/>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>

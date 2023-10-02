@@ -30,8 +30,15 @@
       DOTNET_GCDynamicAdaptationMode: 1
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       ConnectionStrings__DynamoDb: "http://dynamodb:8000"
+      ConnectionStrings__Redis: "redis:6379"
 
   dynamodb:
     image: amazon/dynamodb-local:latest
     ports:
       - 5434:8000
+
+  redis:
+    image: "redis:latest"
+    command: [sh, -c, "rm -f /data/dump.rdb && redis-server --save '' --appendonly no"]
+    ports:
+      - 5435:6379

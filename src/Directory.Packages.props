@@ -5,6 +5,7 @@
     <NoWarn>NU1507</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="CommunityToolkit.HighPerformance" Version="8.2.1" />
     <PackageVersion Include="MM.Utilities" Version="3.2.0" />
     <PackageVersion Include="FluentValidation" Version="11.7.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
@@ -27,6 +28,7 @@
     <PackageVersion Include="AWSSDK.Core" Version="3.7.202.17" />
     <PackageVersion Include="AWSSDK.DynamoDBv2" Version="3.7.202.3" />
     <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.6.122" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

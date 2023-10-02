@@ -4,6 +4,7 @@ Showcase WebApi built using ASP.NET Core.
 
 ## Features
 
+- [x] NET 8
 - [x] REPR endpoint layout using Minimal APIs
 - [x] Vertical Slice architecture
 - [x] Structured logging using Serilog
@@ -26,3 +27,4 @@ Showcase WebApi built using ASP.NET Core.
 - [ ] Upstream service client using Refit, HTTP Client Factory
 - [ ] Upstream request resilience using Polly
 - [ ] Polly V8
+- [x] Separate OpenAPI documents per versioned API surface

@@ -16,5 +16,11 @@ public sealed class Validator : AbstractValidator<RequestDto>
             RuleFor(r => r.Content)
                 .MaximumLength(1000);
         });
+
+        When(r => r.IdempotencyKey.HasValue, () =>
+        {
+            RuleFor(r => r.IdempotencyKey.Value)
+                .NotEmpty();
+        });
     }
 }

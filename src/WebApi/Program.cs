@@ -18,6 +18,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using WebApi.Authentication;
 using WebApi.Authorization;
 using WebApi.FeatureHandlers;
+using WebApi.IdempotentRequests;
 using WebApi.Middleware;
 
 public static class Program
@@ -110,6 +111,10 @@ public static class Program
             .AddLogging()
             .AddEndpointsApiExplorer()
             .AddProblemDetails()
+            .AddMemoryCache(o =>
+            {
+                o.TrackStatistics = false;
+            })
             .AddValidatorsFromAssemblyContaining(typeof(Program), ServiceLifetime.Singleton)
             .AddSingleton<IDateTime, UtcDateTime>()
             .AddCors(o =>
@@ -164,6 +169,8 @@ public static class Program
                 .AsSelf()
                 .WithTransientLifetime();
         });
+
+        services.AddSingleton<IIdempotentResults, InMemoryResults>();
 
         builder
             .AddSwagger()

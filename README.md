@@ -18,7 +18,7 @@ Showcase WebApi built using ASP.NET Core.
 - [ ] CRUD using Redis
 - [x] Keyset pagination
 - [x] Data seeding using hosted service
-- [ ] Idempotent POST requests
+- [x] Idempotent POST requests
 - [x] Feature Flags middleware
 - [ ] Upstream service client using Refit, HTTP Client Factory
 - [ ] Upstream request resilience using Polly

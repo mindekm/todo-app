@@ -11,6 +11,12 @@ public sealed class Validator : AbstractValidator<RequestDto>
 
         RuleForEach(r => r.Requests)
             .SetValidator(inner);
+
+        When(r => r.IdempotencyKey.HasValue, () =>
+        {
+            RuleFor(r => r.IdempotencyKey.Value)
+                .NotEmpty();
+        });
     }
 
     public sealed class CreateNoteValidator : AbstractValidator<CreateNoteDto>

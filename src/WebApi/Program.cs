@@ -221,6 +221,7 @@ public static class Program
             o.EnableDeepLinking();
 
             o.SwaggerEndpoint($"{ApiGroup.Identity.V1}/swagger.json", "Identity V1");
+            o.SwaggerEndpoint($"{ApiGroup.TodoApp.V1}/swagger.json", "TODO App V1");
         });
         app.UseAuthentication();
         app.UseAuthorization();
@@ -239,6 +240,12 @@ public static class Program
             o.SwaggerDoc(ApiGroup.Identity.V1, new OpenApiInfo
             {
                 Title = "Identity",
+                Version = "V1",
+            });
+
+            o.SwaggerDoc(ApiGroup.TodoApp.V1, new OpenApiInfo
+            {
+                Title = "TODO App",
                 Version = "V1",
             });
 

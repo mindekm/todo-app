@@ -19,6 +19,8 @@ Showcase WebApi built using ASP.NET Core.
 - [x] Keyset pagination
 - [x] Data seeding using hosted service
 - [x] Idempotent POST requests
+  - [x] InMemory
+  - [x] DynamoDb
 - [x] Feature Flags middleware
 - [ ] Upstream service client using Refit, HTTP Client Factory
 - [ ] Upstream request resilience using Polly

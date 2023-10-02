@@ -170,12 +170,11 @@ public static class Program
                 .WithTransientLifetime();
         });
 
-        services.AddSingleton<IIdempotentResults, InMemoryResults>();
-
         builder
             .AddSwagger()
             .AddFeatureManagement()
-            .AddDynamoDb();
+            .AddDynamoDb()
+            .AddIdempotentResults();
 
         return builder;
     }
@@ -312,6 +311,17 @@ public static class Program
             .AddOptions<FeatureConfiguration>()
             .BindConfiguration("FeatureManagement")
             .ValidateOnStart();
+
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddIdempotentResults(this WebApplicationBuilder builder)
+    {
+        var services = builder.Services;
+
+        services.AddSingleton<IIdempotentResults, InMemoryResults>();
+
+        // services.AddTransient<IIdempotentResults, DynamoDbResults>();
 
         return builder;
     }

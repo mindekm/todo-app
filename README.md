@@ -16,7 +16,7 @@ Showcase WebApi built using ASP.NET Core.
 - [x] Crud using DynamoDB
 - [ ] CRUD using EF Core (PostgreSQL)
 - [ ] CRUD using Dapper (PostgreSQL)
-- [ ] CRUD using Redis
+- [x] CRUD using Redis
 - [x] Keyset pagination
 - [x] Data seeding using hosted service
 - [x] Idempotent POST requests

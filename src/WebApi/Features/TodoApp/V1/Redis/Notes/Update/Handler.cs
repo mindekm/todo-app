@@ -1,0 +1,37 @@
+﻿namespace WebApi.Features.TodoApp.V1.Redis.Notes.Update;
+
+using System.Text.Json;
+using CommunityToolkit.HighPerformance.Buffers;
+using StackExchange.Redis;
+using Utilities;
+using WebApi.Data.Redis;
+using WebApi.DomainErrors;
+using WebApi.FeatureHandlers;
+
+public sealed class Handler(IConnectionMultiplexer multiplexer, IDateTime dateTime)
+    : CommandHandler<Command, Maybe<DomainError>>
+{
+    protected override async ValueTask<Maybe<DomainError>> Handle(CancellationToken ct)
+    {
+        var db = multiplexer.GetDatabase();
+        var key = $"User:{Command.UserId}__Note:{Command.Id}";
+
+        using var lease = await db.StringGetLeaseAsync(key);
+        if (lease is null || lease.Length == 0)
+        {
+            return Maybe.Some(DomainError.NotFound(Command.Id));
+        }
+
+        var entity = JsonSerializer.Deserialize<NoteEntity>(lease.Span);
+
+        entity.Content = Command.Content.UnwrapOrDefault();
+        entity.ModifiedAt = dateTime.Now;
+
+        using var buffer = new ArrayPoolBufferWriter<byte>();
+        await using var write = new Utf8JsonWriter(buffer);
+        JsonSerializer.Serialize(write, entity);
+
+        await db.StringSetAsync(key, buffer.WrittenMemory);
+        return Maybe.None;
+    }
+}

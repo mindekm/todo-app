@@ -24,7 +24,7 @@ Showcase WebApi built using ASP.NET Core.
   - [x] DynamoDb
   - [x] Redis
 - [x] Feature Flags middleware
-- [ ] Upstream service client using Refit, HTTP Client Factory
-- [ ] Upstream request resilience using Polly
+- [x] Upstream service client using Refit, HTTP Client Factory
+- [x] Upstream request resilience using Polly
 - [ ] Polly V8
 - [x] Separate OpenAPI documents per versioned API surface

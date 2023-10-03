@@ -31,6 +31,7 @@
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       ConnectionStrings__DynamoDb: "http://dynamodb:8000"
       ConnectionStrings__Redis: "redis:6379"
+      ConnectionStrings__SwApi: "https://swapi.dev/api/"
 
   dynamodb:
     image: amazon/dynamodb-local:latest

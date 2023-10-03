@@ -1,5 +1,8 @@
 namespace WebApi;
 
+using System.Diagnostics;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using Amazon;
@@ -8,9 +11,16 @@ using Amazon.Extensions.NETCore.Setup;
 using Amazon.Runtime;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Http;
 using Microsoft.OpenApi.Models;
+using Polly;
+using Polly.CircuitBreaker;
+using Polly.Extensions.Http;
+using Polly.Timeout;
 using Prometheus;
 using Prometheus.DotNetRuntime;
+using Refit;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Formatting.Compact;
@@ -20,7 +30,9 @@ using WebApi.Authentication;
 using WebApi.Authorization;
 using WebApi.FeatureHandlers;
 using WebApi.IdempotentRequests;
+using WebApi.MessageHandlers;
 using WebApi.Middleware;
+using WebApi.SwApi;
 
 public static class Program
 {
@@ -129,7 +141,8 @@ public static class Program
                         .WithExposedHeaders("x-request-id")
                         .SetPreflightMaxAge(TimeSpan.FromHours(1));
                 });
-            });
+            })
+            .AddPolicyRegistry();
 
         services
             .Configure<RouteHandlerOptions>(o =>
@@ -176,7 +189,8 @@ public static class Program
             .AddFeatureManagement()
             .AddDynamoDb()
             .AddIdempotentResults()
-            .AddRedis();
+            .AddRedis()
+            .AddSwApi();
 
         return builder;
     }
@@ -334,6 +348,64 @@ public static class Program
 
         var multiplexer = ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"));
         services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddSwApi(this WebApplicationBuilder builder)
+    {
+        var services = builder.Services;
+
+        services.AddTransient<CircuitBreakerMessageHandler>();
+        services.AddTransient<LoggingMessageHandler>();
+        services.AddTransient<InstrumentationMessageHandler>();
+
+        // Retry until overall timeout is reached
+        var retry = HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .Or<TimeoutRejectedException>()
+            .Or<BrokenCircuitException>()
+            .WaitAndRetryForeverAsync(
+                (attemptNumber, _) =>
+                {
+                    // Exponential backoff, first failure is retried immediately
+                    return attemptNumber == 1
+                        ? TimeSpan.Zero
+                        : TimeSpan.FromSeconds(Math.Pow(2, attemptNumber) / 2);
+                });
+
+        var perCallTimeout = Policy.TimeoutAsync<HttpResponseMessage>(
+            TimeSpan.FromSeconds(5));
+
+        var overallTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
+
+        services
+            .AddRefitClient<ISwApiClient>()
+            .ConfigureHttpClient(c =>
+            {
+                c.Timeout = Timeout.InfiniteTimeSpan;
+                c.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("TODOApp", Version));
+                c.BaseAddress = new Uri(builder.Configuration.GetConnectionString("SwApi"));
+            })
+            .ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                return new SocketsHttpHandler
+                {
+                    UseCookies = false,
+                    AllowAutoRedirect = false,
+                    PooledConnectionLifetime = TimeSpan.FromMinutes(2),
+                    ActivityHeadersPropagator = DistributedContextPropagator.CreateNoOutputPropagator(),
+                    AutomaticDecompression = DecompressionMethods.All,
+                };
+            })
+            .SetHandlerLifetime(Timeout.InfiniteTimeSpan)
+            .AddPolicyHandler(overallTimeout)
+            .AddPolicyHandler(retry)
+            .AddHttpMessageHandler<CircuitBreakerMessageHandler>()
+            .AddPolicyHandler(perCallTimeout)
+            .AddHttpMessageHandler<LoggingMessageHandler>()
+            .AddHttpMessageHandler<InstrumentationMessageHandler>();
+        services.RemoveAll<IHttpMessageHandlerBuilderFilter>();
 
         return builder;
     }

@@ -19,9 +19,9 @@ public sealed class Endpoint : EndpointBuilder
             Id = id,
             UserId = principal.GetUserId(),
         };
-        var resultOrError = await handler.Handle(query, ct);
+        var errorOrResult = await handler.Handle(query, ct);
 
-        if (resultOrError.TryUnwrapRight(out var result))
+        if (errorOrResult.TryUnwrapRight(out var result))
         {
             var response = new ResponseDto
             {
@@ -35,7 +35,7 @@ public sealed class Endpoint : EndpointBuilder
             return Ok(response);
         }
 
-        return resultOrError.UnwrapLeft() switch
+        return errorOrResult.UnwrapLeft() switch
         {
             ResourceNotFound => NotFound(),
             _ => throw new UnhandledDomainErrorException(),

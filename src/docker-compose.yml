@@ -19,6 +19,7 @@
         PRODUCT_VERSION: "1.0.0"
     depends_on:
       - dynamodb
+      - redis
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: "http://+:3000"

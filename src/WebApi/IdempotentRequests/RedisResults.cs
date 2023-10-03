@@ -12,8 +12,8 @@ public sealed class RedisResults(IConnectionMultiplexer multiplexer) : IIdempote
         var database = multiplexer.GetDatabase();
 
         using var buffer = new ArrayPoolBufferWriter<byte>();
-        await using var write = new Utf8JsonWriter(buffer);
-        JsonSerializer.Serialize(write, ToDto(result));
+        await using var writer = new Utf8JsonWriter(buffer);
+        JsonSerializer.Serialize(writer, ToDto(result));
 
         await database.StringSetAsync(FormatKey(key), buffer.WrittenMemory, TimeSpan.FromMinutes(5));
     }

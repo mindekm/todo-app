@@ -28,8 +28,8 @@ public sealed class Handler(IConnectionMultiplexer multiplexer, IDateTime dateTi
         entity.ModifiedAt = dateTime.Now;
 
         using var buffer = new ArrayPoolBufferWriter<byte>();
-        await using var write = new Utf8JsonWriter(buffer);
-        JsonSerializer.Serialize(write, entity);
+        await using var writer = new Utf8JsonWriter(buffer);
+        JsonSerializer.Serialize(writer, entity);
 
         await db.StringSetAsync(key, buffer.WrittenMemory);
         return Maybe.None;

@@ -8,7 +8,7 @@ using WebApi.DomainErrors;
 
 public sealed class Endpoint : EndpointBuilder
 {
-    private static async ValueTask<Results<Ok<ResponseDto>, NotFound>> Action(
+    public static async ValueTask<Results<Ok<ResponseDto>, NotFound>> Action(
         [FromRoute] Guid id,
         ClaimsPrincipal principal,
         Handler handler,

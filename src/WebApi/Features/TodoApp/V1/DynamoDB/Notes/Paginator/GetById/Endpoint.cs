@@ -8,7 +8,7 @@ using WebApi.DomainErrors;
 
 public sealed class Endpoint : EndpointBuilder
 {
-    public async ValueTask<Results<Ok<ResponseDto>, ValidationProblem, NotFound>> Action(
+    public static async ValueTask<Results<Ok<ResponseDto>, ValidationProblem, NotFound>> Action(
         [AsParameters] Parameters parameters,
         IValidator<Parameters> validator,
         ClaimsPrincipal principal,

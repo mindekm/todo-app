@@ -1,7 +1,5 @@
 ﻿namespace WebApi.Features.TodoApp.V1.Redis.Notes.GetById;
 
-using Utilities;
-
 public sealed class QueryResult
 {
     public required Guid Id { get; init; }

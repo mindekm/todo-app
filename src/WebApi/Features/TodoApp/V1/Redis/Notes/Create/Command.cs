@@ -1,7 +1,5 @@
 ﻿namespace WebApi.Features.TodoApp.V1.Redis.Notes.Create;
 
-using Utilities;
-
 public sealed class Command
 {
     public required string Title { get; init; }

@@ -1,7 +1,5 @@
 ﻿namespace WebApi.Features.TodoApp.V1.DynamoDB.Notes.Update;
 
-using Utilities;
-
 public sealed class Command
 {
     public required Guid Id { get; init; }

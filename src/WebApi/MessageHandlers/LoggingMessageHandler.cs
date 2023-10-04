@@ -1,7 +1,5 @@
 ﻿namespace WebApi.MessageHandlers;
 
-using Utilities;
-
 public sealed partial class LoggingMessageHandler(ILogger<LoggingMessageHandler> logger) : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(

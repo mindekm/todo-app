@@ -1,7 +1,6 @@
 namespace WebApi.Features.TodoApp.V1.Redis.Notes.Delete;
 
 using StackExchange.Redis;
-using Utilities;
 using WebApi.DomainErrors;
 using WebApi.FeatureHandlers;
 

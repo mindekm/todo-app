@@ -2,7 +2,6 @@
 
 using System.Text.Json;
 using Amazon.DynamoDBv2.Model;
-using Utilities;
 
 public sealed class DynamoDbResults(DynamoDb db, IDateTime dateTime) : IIdempotentResults
 {

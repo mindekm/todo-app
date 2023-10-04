@@ -1,7 +1,6 @@
 ﻿namespace WebApi.IdempotentRequests;
 
 using Microsoft.Extensions.Caching.Memory;
-using Utilities;
 
 public sealed class InMemoryResults(IMemoryCache cache) : IIdempotentResults
 {

@@ -1,7 +1,5 @@
 ﻿namespace WebApi.Features.Identity.V1.ApiKeys.Paginator.GetById;
 
-using Utilities;
-
 public sealed class Page
 {
     public required int PageSize { get; init; }

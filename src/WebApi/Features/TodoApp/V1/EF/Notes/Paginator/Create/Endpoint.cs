@@ -3,7 +3,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Utilities;
 
 public sealed class Endpoint : EndpointBuilder
 {

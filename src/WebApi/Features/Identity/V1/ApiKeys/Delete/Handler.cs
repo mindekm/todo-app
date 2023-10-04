@@ -1,7 +1,6 @@
 ﻿namespace WebApi.Features.Identity.V1.ApiKeys.Delete;
 
 using Amazon.DynamoDBv2.Model;
-using Utilities;
 using WebApi.DomainErrors;
 using WebApi.FeatureHandlers;
 

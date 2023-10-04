@@ -1,7 +1,6 @@
 ﻿namespace WebApi.MessageHandlers;
 
 using Prometheus;
-using Utilities;
 
 public sealed class InstrumentationMessageHandler : DelegatingHandler
 {

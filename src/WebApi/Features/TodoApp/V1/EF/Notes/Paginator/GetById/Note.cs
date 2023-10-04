@@ -1,7 +1,5 @@
 ﻿namespace WebApi.Features.TodoApp.V1.EF.Notes.Paginator.GetById;
 
-using Utilities;
-
 public sealed class Note
 {
     public required Guid Id { get; init; }

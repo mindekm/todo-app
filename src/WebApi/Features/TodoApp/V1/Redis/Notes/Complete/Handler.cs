@@ -3,7 +3,6 @@
 using System.Text.Json;
 using CommunityToolkit.HighPerformance.Buffers;
 using StackExchange.Redis;
-using Utilities;
 using WebApi.Data.Redis;
 using WebApi.DomainErrors;
 using WebApi.FeatureHandlers;

@@ -2,9 +2,6 @@
 
 using System.Security.Claims;
 using FluentValidation;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Utilities;
 using WebApi.Authorization;
 using WebApi.DomainErrors;
 

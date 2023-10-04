@@ -3,7 +3,6 @@
 using System.Text.Json;
 using CommunityToolkit.HighPerformance.Buffers;
 using StackExchange.Redis;
-using Utilities;
 
 public sealed class RedisResults(IConnectionMultiplexer multiplexer) : IIdempotentResults
 {

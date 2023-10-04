@@ -1,7 +1,6 @@
 ﻿namespace WebApi.Features.TodoApp.V1.DynamoDB.Notes.Paginator.GetById;
 
 using Amazon.DynamoDBv2.Model;
-using Utilities;
 
 public sealed class Note
 {

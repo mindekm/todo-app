@@ -1,7 +1,5 @@
 ﻿namespace WebApi.Features.TodoApp.V1.EF.Notes.Update;
 
-using Utilities;
-
 public sealed class Command
 {
     public required Guid Id { get; init; }

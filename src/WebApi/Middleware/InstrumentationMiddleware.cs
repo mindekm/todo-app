@@ -1,7 +1,6 @@
 ﻿namespace WebApi.Middleware;
 
 using Prometheus;
-using Utilities;
 
 public sealed class InstrumentationMiddleware(RequestDelegate next)
 {

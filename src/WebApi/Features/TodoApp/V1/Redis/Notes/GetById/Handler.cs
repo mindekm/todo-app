@@ -2,7 +2,6 @@
 
 using System.Text.Json;
 using StackExchange.Redis;
-using Utilities;
 using WebApi.Data.Redis;
 using WebApi.DomainErrors;
 using WebApi.FeatureHandlers;

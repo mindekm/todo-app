@@ -1,7 +1,6 @@
 ﻿namespace WebApi.Features.TodoApp.V1.DynamoDB.Notes.GetById;
 
 using Amazon.DynamoDBv2.Model;
-using Utilities;
 using WebApi.DomainErrors;
 using WebApi.FeatureHandlers;
 

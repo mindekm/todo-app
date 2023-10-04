@@ -1,7 +1,6 @@
 ﻿namespace WebApi.Features.TodoApp.V1.EF.Notes.GetById;
 
 using Microsoft.EntityFrameworkCore;
-using Utilities;
 using WebApi.Data.Ef;
 using WebApi.DomainErrors;
 using WebApi.FeatureHandlers;

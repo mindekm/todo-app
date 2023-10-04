@@ -20,6 +20,7 @@
     depends_on:
       - dynamodb
       - redis
+      - db
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: "http://+:3000"
@@ -33,6 +34,7 @@
       ConnectionStrings__DynamoDb: "http://dynamodb:8000"
       ConnectionStrings__Redis: "redis:6379"
       ConnectionStrings__SwApi: "https://swapi.dev/api/"
+      ConnectionStrings__Pg: "Host=localhost;Database=TodoApp;Username=postgres;Password=local"
 
   dynamodb:
     image: amazon/dynamodb-local:latest
@@ -44,3 +46,17 @@
     command: [sh, -c, "rm -f /data/dump.rdb && redis-server --save '' --appendonly no"]
     ports:
       - 5435:6379
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: local
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5433:8080

@@ -11,6 +11,7 @@ using Amazon.Extensions.NETCore.Setup;
 using Amazon.Runtime;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http;
 using Microsoft.OpenApi.Models;
@@ -28,6 +29,7 @@ using StackExchange.Redis;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using WebApi.Authentication;
 using WebApi.Authorization;
+using WebApi.Data.Ef;
 using WebApi.FeatureHandlers;
 using WebApi.IdempotentRequests;
 using WebApi.MessageHandlers;
@@ -67,6 +69,11 @@ public static class Program
                 .ConfigureApplication()
                 .Run();
 
+            return 0;
+        }
+        catch (HostAbortedException e)
+        {
+            Log.Debug(e, "Host aborted");
             return 0;
         }
         catch (Exception e)
@@ -190,7 +197,8 @@ public static class Program
             .AddDynamoDb()
             .AddIdempotentResults()
             .AddRedis()
-            .AddSwApi();
+            .AddSwApi()
+            .AddEf();
 
         return builder;
     }
@@ -406,6 +414,34 @@ public static class Program
             .AddHttpMessageHandler<LoggingMessageHandler>()
             .AddHttpMessageHandler<InstrumentationMessageHandler>();
         services.RemoveAll<IHttpMessageHandlerBuilderFilter>();
+
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddEf(this WebApplicationBuilder builder)
+    {
+        var services = builder.Services;
+        var configuration = builder.Configuration;
+
+        services
+            .AddDbContextPool<TodoAppContext>(o =>
+            {
+                o.UseNpgsql(configuration.GetConnectionString("pg"));
+
+                if (builder.Environment.IsDevelopment())
+                {
+                    o.EnableSensitiveDataLogging();
+                }
+            })
+            .AddPooledDbContextFactory<TodoAppContext>(o =>
+            {
+                o.UseNpgsql(configuration.GetConnectionString("pg"));
+
+                if (builder.Environment.IsDevelopment())
+                {
+                    o.EnableSensitiveDataLogging();
+                }
+            });
 
         return builder;
     }

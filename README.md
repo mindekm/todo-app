@@ -14,7 +14,7 @@ Showcase WebApi built using ASP.NET Core.
 - [x] Policy based Authorization
 - [x] Request validation using FluentValidation
 - [x] Crud using DynamoDB
-- [ ] CRUD using EF Core (PostgreSQL)
+- [x] CRUD using EF Core (PostgreSQL)
 - [ ] CRUD using Dapper (PostgreSQL)
 - [x] CRUD using Redis
 - [x] Keyset pagination

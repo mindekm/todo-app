@@ -1,0 +1,8 @@
+﻿namespace WebApi.Features.TodoApp.V1.EF.Notes.Paginator.Create;
+
+public sealed class ResponseDto
+{
+    public string Token { get; set; }
+
+    public DateTimeOffset ExpiresAt { get; set; }
+}

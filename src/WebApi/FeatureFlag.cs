@@ -9,4 +9,6 @@ public sealed record FeatureFlag(string Name)
     public static readonly FeatureFlag Redis = new FeatureFlag("Redis");
 
     public static readonly FeatureFlag Ef = new FeatureFlag("Ef");
+
+    public static readonly FeatureFlag Dapper = new FeatureFlag("Dapper");
 }

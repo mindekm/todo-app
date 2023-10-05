@@ -13,7 +13,11 @@ public sealed class NoteEntityConfiguration : IEntityTypeConfiguration<NoteEntit
 
         builder.HasKey(e => e.Id);
 
-        builder.HasIndex(e => e.ExternalId).IsUnique();
+        builder.HasIndex(e => new
+        {
+            e.ExternalId,
+            e.CreatedBy,
+        });
         builder.HasIndex(e => e.CreatedBy);
 
         builder

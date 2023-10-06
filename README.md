@@ -1,5 +1,7 @@
 # TODO Notes application
 
+[![Build](https://github.com/mindekm/todo-app/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/mindekm/todo-app/actions/workflows/ci.yml)
+
 Showcase WebApi built using ASP.NET Core.
 
 ## Features
@@ -28,3 +30,4 @@ Showcase WebApi built using ASP.NET Core.
 - [x] Upstream request resilience using Polly
 - [ ] Polly V8
 - [x] Separate OpenAPI documents per versioned API surface
+- [x] CI pipeline using Github Actions

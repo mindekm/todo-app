@@ -23,7 +23,7 @@ public sealed class Handler(IDbContextFactory<TodoAppContext> contextFactory, ID
 
         var query = context.Notes
             .AsNoTracking()
-            .OrderBy(n => n.Id)
+            .OrderByDescending(n => n.Id)
             .Where(n => n.CreatedBy == Query.UserId);
 
         if (paginator.SearchCondition is not null)
@@ -34,7 +34,7 @@ public sealed class Handler(IDbContextFactory<TodoAppContext> contextFactory, ID
 
         if (paginator.LastResult.HasValue)
         {
-            query = query.Where(n => n.Id > paginator.LastResult.Value);
+            query = query.Where(n => n.Id < paginator.LastResult.Value);
         }
 
         var notes = await query

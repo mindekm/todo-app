@@ -1,0 +1,47 @@
+﻿@page "/login"
+@attribute [AllowAnonymous]
+
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Small" >
+  <MudGrid>
+    <MudItem xs="12">
+      <MudPaper Class="pa-4">
+        <MudForm>
+          <MudItem xs="12" Class="d-flex justify-center">
+            <MudText Typo="Typo.h4">Sign In</MudText>
+          </MudItem>
+
+          <MudItem xs="12">
+            <MudTextField T="string"
+                          Label="Password"
+                          Required="true"
+                          RequiredError="Value is required!"
+                          @bind-Value="@key"
+                          Adornment="Adornment.End"
+                          AdornmentIcon="@passwordInputIcon"
+                          OnAdornmentClick="@TogglePasswordVisibility"
+                          InputType="@passwordInputType"/>
+          </MudItem>
+
+          <MudItem xs="12" Class="d-flex justify-center mt-5">
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Size="Size.Large"
+                       Style="width: 100%;"
+                       OnClick="@Submit">
+              Sign In
+            </MudButton>
+          </MudItem>
+        </MudForm>
+      </MudPaper>
+
+      <MudPaper Class="pa-4 mt-4">
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Info"
+                   Size="Size.Medium"
+                   OnClick="@UseDevelopmentKey">
+          Development key
+        </MudButton>
+      </MudPaper>
+    </MudItem>
+  </MudGrid>
+</MudContainer>

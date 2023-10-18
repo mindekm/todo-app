@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{B05110C2-9EA6-44DB-A622-7A612F185BE1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{60AA3B32-6958-45AC-A730-5998408C728F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasm", "BlazorWasm\BlazorWasm.csproj", "{0B8E1E5C-06CE-4D6B-A511-17DB3CE0B164}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,12 @@ Global
 		{B05110C2-9EA6-44DB-A622-7A612F185BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B05110C2-9EA6-44DB-A622-7A612F185BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B05110C2-9EA6-44DB-A622-7A612F185BE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B8E1E5C-06CE-4D6B-A511-17DB3CE0B164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B8E1E5C-06CE-4D6B-A511-17DB3CE0B164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B8E1E5C-06CE-4D6B-A511-17DB3CE0B164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B8E1E5C-06CE-4D6B-A511-17DB3CE0B164}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B8E1E5C-06CE-4D6B-A511-17DB3CE0B164} = {60AA3B32-6958-45AC-A730-5998408C728F}
 	EndGlobalSection
 EndGlobal

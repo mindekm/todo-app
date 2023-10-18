@@ -1,0 +1,40 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider @bind-IsDarkMode="@isDarkMode" @ref="@themeProvider" />
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+  <MudAppBar Elevation="1">
+    <AuthorizeView>
+      <MudIconButton Icon="@(Icons.Material.Filled.Menu)" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
+    </AuthorizeView>
+    <MudText Typo="Typo.h6">TODO App</MudText>
+    <MudSpacer/>
+    <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@ToggleDarkMode" />
+    <AuthorizeView>
+      <Authorized>
+        <MudMenu Icon="@(Icons.Material.Filled.Build)">
+          <MudMenuItem OnClick="@Logout">Logout</MudMenuItem>
+        </MudMenu>
+      </Authorized>
+    </AuthorizeView>
+  </MudAppBar>
+
+  <AuthorizeView Context="outer">
+    <MudDrawer @bind-Open="@isDrawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+      <MudNavMenu>
+        <MudNavLink Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+        <MudNavLink Href="/notes" Match="NavLinkMatch.Prefix">Notes</MudNavLink>
+        <AuthorizeView Roles="Admin">
+          <MudNavGroup Title="Key Management" Expanded="true">
+            <MudNavLink Href="/keys" Match="NavLinkMatch.Prefix">API Keys</MudNavLink>
+          </MudNavGroup>
+        </AuthorizeView>
+      </MudNavMenu>
+    </MudDrawer>
+  </AuthorizeView>
+  <MudMainContent>
+    @Body
+  </MudMainContent>
+</MudLayout>

@@ -1,0 +1,74 @@
+﻿@page "/notes"
+@attribute [Authorize]
+
+<PageTitle>Notes</PageTitle>
+
+<MudPaper Class="ma-4 pa-4">
+  <MudStack Row="true">
+    <MudButton StartIcon="@(Icons.Material.Filled.Add)"
+               Color="Color.Primary"
+               Variant="Variant.Filled"
+               OnClick="@(OpenModal)">
+      Create Note
+    </MudButton>
+    <MudButton StartIcon="@(Icons.Material.Filled.Refresh)"
+               Color="Color.Secondary"
+               Variant="Variant.Filled"
+               OnClick="@(Refresh)">
+      Reload
+    </MudButton>
+  </MudStack>
+</MudPaper>
+<MudPaper Class="ma-4 pa-1">
+  @if (loading)
+  {
+    <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-6">
+      <MudProgressCircular Color="Color.Primary" Indeterminate="true"/>
+    </MudContainer>
+  }
+  else
+  {
+    <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-6">
+      <MudGrid>
+        @foreach (var model in @notes)
+        {
+          <MudItem xs="4">
+            <MudPaper Class="pa-4">
+              <MudItem xs="12" Class="d-flex justify-center">
+                <MudText Typo="Typo.h4">@model.Title</MudText>
+                <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(model))" />
+              </MudItem>
+
+              <MudItem xs="12" Class="mt-5">
+                <MudTextField T="string" ReadOnly="true" Lines="5" Variant="Variant.Filled" Text="@model.Content" />
+              </MudItem>
+
+              <MudItem xs="12" Class="mt-2">
+                <span>@(model.IsComplete ? "Completed" : "In Progress")</span>
+                <MudToggleIconButton
+                  Toggled="@model.IsComplete"
+                  Disabled="@model.IsComplete"
+                  ToggledChanged="@(() => Complete(model))"
+                  Icon="@Icons.Material.Filled.CheckBoxOutlineBlank"
+                  ToggledIcon="@Icons.Material.Filled.Check"/>
+
+              </MudItem>
+            </MudPaper>
+          </MudItem>
+        }
+      </MudGrid>
+
+      <MudContainer MaxWidth="
+                           MaxWidth.ExtraSmall" Class="mt-6 mb-6">
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Size="Size.Large"
+                   Style="width: 100%;"
+                   OnClick="@LoadMore"
+                   Disabled="@(token == null)">
+          Load more
+        </MudButton>
+      </MudContainer>
+    </MudContainer>
+  }
+</MudPaper>

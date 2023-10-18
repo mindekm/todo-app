@@ -1,0 +1,33 @@
+﻿<EditForm Model="@model">
+  <MudDialog>
+    <TitleContent>
+      <MudText Typo="Typo.h6">Create Api Key</MudText>
+    </TitleContent>
+    <DialogContent>
+      <MudTextField T="string" Label="Name" @bind-value="@model.Name"/>
+      <MudSelect Label="Roles" MultiSelection="true" Clearable="true" @bind-SelectedValues="@model.Roles">
+        @foreach (var role in roles)
+        {
+          <MudSelectItem T="string" Value="@role">@role</MudSelectItem>
+        }
+      </MudSelect>
+    </DialogContent>
+    <DialogActions>
+      <MudButton Variant="Variant.Filled"
+                 ButtonType="ButtonType.Submit"
+                 Color="Color.Success"
+                 OnClick="@Submit"
+                 Disabled="@submitted">
+        Submit
+      </MudButton>
+    </DialogActions>
+  </MudDialog>
+</EditForm>
+
+@if(@submitted)
+{
+  <MudPaper Class="pa-4 ma-1">
+    <MudText>Key will not be shown again!</MudText>
+    <MudTextField T="string" ReadOnly="true" Variant="Variant.Filled" Lines="2" Text="@key" />
+  </MudPaper>
+}

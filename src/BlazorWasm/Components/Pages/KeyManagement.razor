@@ -1,0 +1,48 @@
+﻿@page "/keys"
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Key Management</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-6">
+  <MudTable Items="@keys" Bordered="true">
+    <ToolBarContent>
+      <MudStack Row="true">
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@(Icons.Material.Filled.Add)"
+                   IconColor="Color.Surface"
+                   OnClick="@(OpenModal)">
+          Create new key
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Secondary"
+                   StartIcon="@(Icons.Material.Filled.Refresh)"
+                   OnClick="@(LoadData)">
+          Reload
+        </MudButton>
+      </MudStack>
+    </ToolBarContent>
+    <HeaderContent>
+      <MudTh>ID</MudTh>
+      <MudTh>Name</MudTh>
+      <MudTh>Roles</MudTh>
+      <MudTh>Created At</MudTh>
+      <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+      <MudTd DataLabel="ID">@context.Id</MudTd>
+      <MudTd DataLabel="Name">@context.Name</MudTd>
+      <MudTd DataLabel="Roles">@(string.Join(',', context.Roles))</MudTd>
+      <MudTd DataLabel="Created At">@context.CreatedAt</MudTd>
+      <MudTd DataLabel="Actions" Style="text-align:center">
+        <MudMenu StartIcon="@(Icons.Material.Filled.Menu)">
+          <MudMenuItem>Details</MudMenuItem>
+          <MudMenuItem OnClick="@(() => Delete(context))">Delete</MudMenuItem>
+        </MudMenu>
+      </MudTd>
+    </RowTemplate>
+    <PagerContent>
+      <MudTablePager/>
+    </PagerContent>
+  </MudTable>
+</MudContainer>

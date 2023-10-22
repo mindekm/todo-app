@@ -21,6 +21,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.2.23479.6" />
     <PackageVersion Include="MudBlazor" Version="6.11.0" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-rc.1" />
+    <PackageVersion Include="OneOf" Version="3.0.263" />
     <PackageVersion Include="Polly" Version="7.2.4" />
     <PackageVersion Include="Refit" Version="7.0.0" />
     <PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />

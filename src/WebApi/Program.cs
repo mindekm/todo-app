@@ -253,6 +253,7 @@ public static class Program
             o.SwaggerEndpoint($"{ApiGroup.Identity.V1}/swagger.json", "Identity V1");
             o.SwaggerEndpoint($"{ApiGroup.TodoApp.V1}/swagger.json", "TODO App V1");
             o.SwaggerEndpoint($"{ApiGroup.TodoApp.V2}/swagger.json", "TODO App V2");
+            o.SwaggerEndpoint($"{ApiGroup.TodoApp.V3}/swagger.json", "TODO App V3");
         });
         app.UseAuthentication();
         app.UseAuthorization();
@@ -280,6 +281,11 @@ public static class Program
                 Version = "V1",
             });
             o.SwaggerDoc(ApiGroup.TodoApp.V2, new OpenApiInfo
+            {
+                Title = "TODO App",
+                Version = "V2",
+            });
+            o.SwaggerDoc(ApiGroup.TodoApp.V3, new OpenApiInfo
             {
                 Title = "TODO App",
                 Version = "V2",

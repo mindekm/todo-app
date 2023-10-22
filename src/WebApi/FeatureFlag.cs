@@ -13,4 +13,6 @@ public sealed record FeatureFlag(string Name)
     public static readonly FeatureFlag Dapper = new FeatureFlag("Dapper");
 
     public static readonly FeatureFlag TodoAppV2 = new FeatureFlag("TodoAppV2");
+
+    public static readonly FeatureFlag TodoAppV3 = new FeatureFlag("TodoAppV3");
 }

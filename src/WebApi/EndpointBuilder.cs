@@ -26,6 +26,9 @@ public abstract class EndpointBuilder : IEndpointBuilder
     protected static UnauthorizedHttpResult NotAuthorized()
         => TypedResults.Unauthorized();
 
+    protected static BadRequest BadRequest()
+        => TypedResults.BadRequest();
+
     protected static IResult MapError(DomainError error)
     {
         return error switch

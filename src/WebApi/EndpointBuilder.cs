@@ -2,6 +2,7 @@
 
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http.HttpResults;
+using WebApi.DomainErrors;
 
 public abstract class EndpointBuilder : IEndpointBuilder
 {
@@ -21,4 +22,17 @@ public abstract class EndpointBuilder : IEndpointBuilder
 
     protected static Conflict Conflict()
         => TypedResults.Conflict();
+
+    protected static UnauthorizedHttpResult NotAuthorized()
+        => TypedResults.Unauthorized();
+
+    protected static IResult MapError(DomainError error)
+    {
+        return error switch
+        {
+            ResourceNotFound => NotFound(),
+            Unauthorized => NotAuthorized(),
+            _ => throw new UnhandledDomainErrorException(),
+        };
+    }
 }

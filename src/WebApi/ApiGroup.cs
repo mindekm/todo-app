@@ -12,5 +12,7 @@ public static class ApiGroup
     public static class TodoApp
     {
         public static readonly string V1 = "todo-app-v1";
+
+        public static readonly string V2 = "todo-app-v2";
     }
 }

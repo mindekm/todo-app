@@ -211,8 +211,25 @@ public static class Program
             .WithGroupName(ApiGroup.Internal);
 
         app
-            .MapGet("health", () => Results.Ok())
-            .ShortCircuit()
+            .MapGet("health", () => ValueTask.CompletedTask)
+            .ShortCircuit(200)
+            .WithGroupName(ApiGroup.Internal);
+
+        app
+            .MapGet("/favicon.ico", () => ValueTask.CompletedTask)
+            .ShortCircuit(404)
+            .WithGroupName(ApiGroup.Internal);
+
+        app
+            .MapGet("/robots.txt", () => """
+                                         User-agent: *
+                                         Allow: /
+                                         """)
+            .ShortCircuit(200)
+            .WithGroupName(ApiGroup.Internal);
+
+        app
+            .MapShortCircuit(404, ".well-known")
             .WithGroupName(ApiGroup.Internal);
 
         app
